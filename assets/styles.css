@@ -15,7 +15,7 @@
   --voile:      rgba(244, 239, 233, 0.10);
   --voile-fort: rgba(244, 239, 233, 0.22);
 
-  --serif: "Marcellus", "Hoefler Text", Georgia, serif;
+  --serif: "Fraunces", "Hoefler Text", Georgia, "Times New Roman", serif;
   --sans:  "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mono:  "Spline Sans Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
@@ -66,7 +66,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---------- typographie ---------- */
-h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; letter-spacing: .012em; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; letter-spacing: -.005em; text-wrap: balance; font-optical-sizing: auto; }
 h1 { font-size: clamp(2.05rem, 1.4rem + 3vw, 3.9rem); line-height: 1.05; }
 h2 { font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.15rem); line-height: 1.12; }
 h3 { font-size: 1.1rem; line-height: 1.25; }

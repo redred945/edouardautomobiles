@@ -12,7 +12,7 @@ Photo plein cadre, interface effacée, mouvement lent et marqué. Noir profond
 `#0a0a0b` + salmon `#e7a78e` repris du logo. Aucune boîte encadrée : de l'espace,
 des filets 1px, de grandes images. Références Kidston / Zagato / Classic Driver.
 
-- Typo : **Marcellus** (titres, serif inscriptionnel) / **Archivo** (UI, texte) / **Spline Sans Mono** (données, prix, labels)
+- Typo : **Fraunces** (titres, serif contemporain) / **Archivo** (UI, texte) / **Spline Sans Mono** (données, prix, labels)
 - Animations : séquence d'intro qui pose le logo (1×/session), parallaxe du hero,
   apparitions au scroll, hover cinétiques sur les voitures, compteurs animés.
   Tout se coupe avec `prefers-reduced-motion`.
