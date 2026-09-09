@@ -295,12 +295,12 @@ p { margin: 0; }
   color: var(--craie-dim);
 }
 
-/* ---------- hero : équilibre sur mobile ---------- */
+/* ---------- hero : texte en haut sur mobile (pas de vide au-dessus) ---------- */
 @media (max-width: 620px) {
-  .hero { min-height: 78svh; }
+  .hero { min-height: 82svh; align-items: flex-start; }
   .hero-in {
-    padding-top: clamp(128px, 25vh, 200px);   /* bande d'image mesurée au-dessus du titre */
-    padding-bottom: 28px;
+    padding-top: 96px;      /* juste sous le header, le texte remonte */
+    padding-bottom: 40px;
   }
   .hero h1 { max-width: 100%; font-size: clamp(2rem, 8.5vw, 2.6rem); }
   .hero .lede { margin-top: 18px; max-width: 100%; font-size: .96rem; line-height: 1.48; }
