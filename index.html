@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Marcellus&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=6" />
+<link rel="stylesheet" href="assets/styles.css?v=10" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -104,28 +104,42 @@
     <p class="kicker">Le stock</p>
     <h2>Actuellement à l'atelier</h2>
   </div>
-  <div class="gallery" id="stock-gallery" role="list" aria-label="Véhicules en stock">
-    <!-- injecté depuis assets/stock.js -->
+  <div class="slider" id="slider">
+    <div class="gallery" id="stock-gallery" role="list" aria-label="Véhicules en stock">
+      <!-- injecté depuis assets/stock.js -->
+    </div>
+    <div class="slider-ctl" aria-hidden="true">
+      <button type="button" class="s-btn s-prev" id="s-prev" aria-label="Véhicule précédent">&larr;</button>
+      <div class="s-track"><span id="s-fill"></span></div>
+      <button type="button" class="s-btn s-next" id="s-next" aria-label="Véhicule suivant">&rarr;</button>
+    </div>
   </div>
   <p class="gallery-hint reveal">
-    Faites défiler &nbsp;·&nbsp;
+    <span class="hint-touch">Glissez</span><span class="hint-desk">Faites défiler</span>
+    &nbsp;·&nbsp;
     <a href="https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm" target="_blank" rel="noopener">Voir tout le stock — Leboncoin</a>
     &nbsp;·&nbsp;
     <a href="https://pros.lacentrale.fr/C044104/" target="_blank" rel="noopener">La Centrale</a>
   </p>
 </section>
 
-<!-- ===================== ATELIER ===================== -->
-<figure class="plate">
-  <img src="assets/img/insta-1.jpg" alt="L'atelier Édouard Automobiles, logo peint sur le mur" loading="lazy" />
-  <figcaption>L'atelier · Paris 12ᵉ</figcaption>
-</figure>
-
-<!-- ===================== MANIFESTE ===================== -->
-<section class="movement manifesto">
-  <p class="kicker reveal">Négociant en véhicules d'intérêt</p>
-  <p class="big reveal d1">Nous montrons <em>peu</em> de voitures, mais chacune est
-    sourcée, contrôlée et remise à niveau dans nos ateliers avant d'être proposée.</p>
+<!-- ===================== ATELIER — PATCHWORK ===================== -->
+<section class="movement manifesto patchwork" aria-label="L'atelier Édouard Automobiles">
+  <div class="pw-grid" aria-hidden="true">
+    <img src="assets/img/atmo-1.jpg" alt="" loading="lazy" />
+    <img src="assets/img/atmo-2.jpg" alt="" loading="lazy" />
+    <img src="assets/img/atmo-3.jpg" alt="" loading="lazy" />
+    <img src="assets/img/atmo-4.jpg" alt="" loading="lazy" />
+    <img src="assets/img/atmo-5.jpg" alt="" loading="lazy" />
+    <img src="assets/img/atmo-6.jpg" alt="" loading="lazy" />
+    <img src="assets/img/atmo-7.jpg" alt="" loading="lazy" />
+    <img src="assets/img/atmo-8.jpg" alt="" loading="lazy" />
+  </div>
+  <div class="pw-text">
+    <p class="kicker reveal">Négociant en véhicules d'intérêt</p>
+    <p class="big reveal d1">Nous montrons <em>peu</em> de voitures, mais chacune est
+      sourcée, contrôlée et remise à niveau dans nos ateliers avant d'être proposée.</p>
+  </div>
 </section>
 
 <!-- ===================== LA MÉTHODE ===================== -->
@@ -169,7 +183,6 @@
     <div class="svc reveal"><span class="ix" aria-hidden="true">02</span><div class="t">Livraison à domicile</div><div class="g">Partout en France, camion plateau, remise en main propre.</div></div>
     <div class="svc reveal"><span class="ix" aria-hidden="true">03</span><div class="t">Démarches carte grise</div><div class="g">Immatriculation prise en charge, vous repartez avec le certificat provisoire.</div></div>
     <div class="svc reveal"><span class="ix" aria-hidden="true">04</span><div class="t">Extension de garantie</div><div class="g">Jusqu'à 36&nbsp;mois, panne mécanique et électronique.</div></div>
-    <div class="svc reveal"><span class="ix" aria-hidden="true">05</span><div class="t">Financement</div><div class="g">Crédit et LOA via nos partenaires, réponse de principe rapide.</div></div>
   </div>
 </section>
 
@@ -217,7 +230,7 @@
   </div>
 </footer>
 
-<script src="assets/stock.js?v=6"></script>
-<script src="assets/main.js?v=6"></script>
+<script src="assets/stock.js?v=10"></script>
+<script src="assets/main.js?v=10"></script>
 </body>
 </html>

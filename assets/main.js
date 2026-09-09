@@ -174,6 +174,46 @@
     }).join("");
   }
 
+  /* ---------- slider du stock ---------- */
+  function initSlider() {
+    var g = document.getElementById("stock-gallery");
+    var prev = document.getElementById("s-prev");
+    var next = document.getElementById("s-next");
+    var fill = document.getElementById("s-fill");
+    if (!g) return;
+
+    function step() {
+      var p = g.querySelector(".piece");
+      if (!p) return g.clientWidth * 0.8;
+      var gap = parseFloat(getComputedStyle(g).columnGap || getComputedStyle(g).gap || "24") || 24;
+      return p.getBoundingClientRect().width + gap;
+    }
+    function go(dir) {
+      var to = Math.max(0, Math.min(g.scrollLeft + dir * step(), g.scrollWidth - g.clientWidth));
+      try { g.scrollTo({ left: to, behavior: reduce ? "auto" : "smooth" }); }
+      catch (e) { g.scrollLeft = to; }
+      setTimeout(refresh, 350);
+    }
+    if (prev) prev.addEventListener("click", function () { go(-1); });
+    if (next) next.addEventListener("click", function () { go(1); });
+
+    var ticking = false;
+    function refresh() {
+      ticking = false;
+      var max = g.scrollWidth - g.clientWidth;
+      var sl = g.scrollLeft;
+      if (fill) fill.style.width = Math.min(100, ((sl + g.clientWidth) / g.scrollWidth) * 100).toFixed(1) + "%";
+      if (prev) prev.disabled = sl <= 2;
+      if (next) next.disabled = sl >= max - 2;
+    }
+    g.addEventListener("scroll", function () {
+      if (!ticking) { requestAnimationFrame(refresh); ticking = true; }
+    }, { passive: true });
+    window.addEventListener("resize", refresh);
+    // le stock est injecté par renderStock() juste avant : on rafraîchit au tick suivant
+    setTimeout(refresh, 0);
+  }
+
   /* ---------- formulaire ---------- */
   function initForm() {
     var form = document.getElementById("contact-form");
@@ -202,6 +242,7 @@
   initNav();
   initParallax();
   renderStock();
+  initSlider();
   initReveals();
   initCounters();
   initForm();

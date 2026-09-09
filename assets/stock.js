@@ -59,7 +59,7 @@ window.STOCK = [
     specs: ["102 ch", "2021", "1re main", "Historique Mini France"],
     km: "35 000 km",
     prix: "16 990 €",
-    photo: "assets/img/insta-2.jpg",
+    photo: "assets/img/atmo-7.jpg",
     lien: "https://www.leboncoin.fr/ad/voitures/3261287984"
   },
   {
