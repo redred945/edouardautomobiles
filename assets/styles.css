@@ -278,12 +278,6 @@ p { margin: 0; }
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
-.hero-stats .stat b .u {
-  font-size: .5em;
-  color: var(--craie-dim);
-  margin-left: .35em;
-  letter-spacing: .02em;
-}
 .hero-stats .stat span {
   display: block;
   margin-top: 7px;
@@ -437,41 +431,29 @@ p { margin: 0; }
 }
 .piece .caption .km { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--craie-dim); }
 
-/* ---------- Commande du slider ---------- */
-.slider-ctl {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-top: 22px;
-}
-.s-btn {
-  flex: none;
-  width: 44px; height: 44px;
+/* ---------- Flèches du slider (au niveau des cartes) ---------- */
+.slider { position: relative; }
+.s-arrow {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px; height: 48px;
   display: grid; place-items: center;
-  background: transparent;
+  background: rgba(10, 10, 11, .58);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   border: 1px solid var(--voile-fort);
   color: var(--craie);
-  font-size: 1rem;
+  font-size: 1.05rem;
   cursor: pointer;
-  transition: border-color .3s var(--ease), color .3s var(--ease), background .3s var(--ease);
+  transition: opacity .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease), background .3s var(--ease);
 }
-.s-btn:hover:not(:disabled) { border-color: var(--salmon); color: var(--salmon); }
-.s-btn:disabled { opacity: .3; cursor: default; }
-.s-track {
-  flex: 1;
-  height: 1px;
-  background: var(--voile-fort);
-  position: relative;
-  overflow: hidden;
-}
-.s-track span {
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 20%;
-  background: var(--salmon);
-  transition: width .3s var(--ease), transform .3s var(--ease);
-}
-@media (max-width: 820px) { .slider-ctl { display: none; } }
+.s-arrow:hover:not(:disabled) { border-color: var(--salmon); color: var(--salmon); background: rgba(10, 10, 11, .82); }
+.s-arrow:disabled { opacity: 0; pointer-events: none; }
+.s-prev { left: 4px; }
+.s-next { right: 4px; }
+@media (max-width: 620px) { .s-arrow { display: none; } }
 
 .gallery-hint {
   margin-top: 22px;
@@ -482,11 +464,6 @@ p { margin: 0; }
   color: var(--craie-dim);
 }
 .gallery-hint a { color: var(--salmon); }
-.hint-touch { display: none; }
-@media (max-width: 820px) {
-  .hint-desk { display: none; }
-  .hint-touch { display: inline; }
-}
 
 .stock-empty { font-family: var(--mono); font-size: .8rem; letter-spacing: .06em; color: var(--craie-dim); }
 
