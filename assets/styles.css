@@ -279,12 +279,13 @@ p { margin: 0; }
   font-variant-numeric: tabular-nums;
 }
 .hero-stats .stat b .u {
+  display: inline;
   font-size: .62em;
   color: var(--craie-dim);
   vertical-align: baseline;
   margin-left: .04em;
 }
-.hero-stats .stat span {
+.hero-stats .stat > span {
   display: block;
   margin-top: 7px;
   font-family: var(--mono);
