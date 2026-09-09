@@ -271,6 +271,7 @@ p { margin: 0; }
 }
 .hero-stats .stat b {
   display: block;
+  white-space: nowrap;
   font-family: var(--serif);
   font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem);
   color: var(--craie);
@@ -291,6 +292,18 @@ p { margin: 0; }
   letter-spacing: .15em;
   text-transform: uppercase;
   color: var(--craie-dim);
+}
+
+/* ---------- hero : plus d'air sur mobile ---------- */
+@media (max-width: 620px) {
+  .hero { min-height: 100svh; }
+  .hero-in {
+    padding-top: clamp(96px, 20vh, 150px);
+    padding-bottom: 34px;
+  }
+  .hero h1 { max-width: 100%; }
+  .hero .lede { margin-top: 20px; max-width: 100%; font-size: 1rem; line-height: 1.5; }
+  .hero-stats { margin-top: 36px; gap: 22px 40px; }
 }
 
 .scroll-cue {
