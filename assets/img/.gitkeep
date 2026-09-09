@@ -1,0 +1,3 @@
+# Déposez ici les photos des véhicules et de l'atelier.
+# Référencez-les depuis assets/stock.js via le champ "photo",
+# ex. "photo": "assets/img/golf-r-01.jpg"
