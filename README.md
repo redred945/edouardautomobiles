@@ -26,7 +26,8 @@ des filets 1px, de grandes images. Références Kidston / Zagato / Classic Drive
 - `assets/main.js` — intro, parallaxe, reveals, compteurs, rendu du stock, menu mobile, formulaire, année
 - `assets/img/logo-edouard.png` — logo détouré (fond transparent), généré depuis le JPG fourni
 - `assets/img/youngtimerporsche.jpg` — fond de hero (fournie, droits OK)
-- `assets/img/*.webp` — photos véhicules **reprises de Leboncoin (filigrane)** — à remplacer par les originaux
+- `assets/img/insta-1.jpg` — plaque atelier plein cadre (mur + logo, repris d'Instagram)
+- `assets/img/*.webp` — photos véhicules **reprises de Leboncoin (filigrane)** ; `insta-2.jpg` = Mini, repris d'Instagram — à remplacer par les originaux
 - `assets/favicon.svg` — monogramme É salmon
 - Polices via Google Fonts (CDN). Aucune autre dépendance, pas de framework.
 
@@ -50,7 +51,7 @@ devient une pièce dans la galerie de l'accueil, dans l'ordre.
 
 - **Retirer un véhicule** : supprimer son objet (ou `vendu: true` pour le garder marqué).
 - Tableau vide → message « Stock en cours de mise à jour ».
-- Les 3 véhicules présents sont réels (Leboncoin), photos à remplacer par les originaux.
+- Les 8 véhicules présents sont réels (Leboncoin / Instagram), photos à remplacer par les originaux.
 
 ## À personnaliser / compléter
 
@@ -59,9 +60,9 @@ devient une pièce dans la galerie de l'accueil, dans l'ordre.
 | Logo | `logo-edouard.png` détouré depuis le JPG fourni | Fournir le **vectoriel officiel** (SVG) pour une netteté parfaite en grand |
 | Photos véhicules | `*.webp` repris de Leboncoin, **filigrane visible** | Remplacer par les originaux, **mêmes noms de fichiers** |
 | Photo hero | `youngtimerporsche.jpg` (droits OK, confirmé) | Rien — ou une photo maison de l'atelier au même cadrage large |
-| Avis clients | 2 emplacements placeholder dans `#proof` | Recopier 3 à 6 avis récents de Leboncoin (nom, date, modèle) |
+| Avis clients | 2 extraits **réels repris de Google** dans `#avis` | Compléter avec 3 à 6 avis récents (nom, date, modèle) ; brancher un widget Google si voulu |
 | Plan (contact) | iframe OpenStreetMap, marqueur approché sur l'avenue | Affiner `bbox` / `marker`, ou passer à un plan Google si besoin |
-| Téléphone | Non affiché (non communiqué) | Ajouter dans la `<dl>` de `contact.html` + lien `tel:` si souhaité |
+| Téléphone | `07 50 44 27 81` (repris d'Instagram / Google) | Confirmer le numéro |
 | E-mail | `edouard.automobiles@gmail.com` (bio Instagram) | Confirmer / passer à une adresse `@edouard-automobiles.fr` |
 | Formulaire | `mailto` pré-rempli, pas de backend | Brancher Formspree / Web3Forms pour un envoi réel |
 | Textes | Rédigés d'après Leboncoin + Instagram | Relire avec le client (méthode, services, délais) |
