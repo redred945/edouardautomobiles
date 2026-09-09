@@ -75,14 +75,17 @@
   function initParallax() {
     var media = document.getElementById("hero-media");
     var hero = document.getElementById("hero");
-    if (!media || !hero || reduce) return;
+    var img = media && media.querySelector("img");
+    if (!media || !hero || !img || reduce) return;
     var ticking = false;
     function update() {
       ticking = false;
       var rect = hero.getBoundingClientRect();
       if (rect.bottom < 0 || rect.top > window.innerHeight) return;
       var offset = Math.max(0, -rect.top);
-      media.style.transform = "translate3d(0," + (offset * 0.16).toFixed(1) + "px,0) scale(1.04)";
+      // l'image déborde de 20 % en bas : on translate au plus ~12 % de la hauteur
+      var shift = Math.min(offset * 0.12, hero.offsetHeight * 0.12);
+      img.style.transform = "translate3d(0,-" + shift.toFixed(1) + "px,0)";
     }
     window.addEventListener("scroll", function () {
       if (!ticking) { requestAnimationFrame(update); ticking = true; }

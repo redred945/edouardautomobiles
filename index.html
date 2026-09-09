@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Marcellus&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=3" />
+<link rel="stylesheet" href="assets/styles.css?v=6" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -23,6 +23,7 @@
   "name": "Édouard Automobiles",
   "description": "Négociant indépendant en véhicules d'intérêt : youngtimers et occasions récentes, sourcées, révisées en atelier et garanties 12 mois.",
   "email": "edouard.automobiles@gmail.com",
+  "telephone": "+33750442781",
   "priceRange": "€€",
   "address": {
     "@type": "PostalAddress",
@@ -36,9 +37,16 @@
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:30" },
     { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
   ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "214",
+    "bestRating": "5"
+  },
   "sameAs": [
     "https://www.instagram.com/edouard.automobiles/",
-    "https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm"
+    "https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm",
+    "https://pros.lacentrale.fr/C044104/"
   ]
 }
 </script>
@@ -82,7 +90,7 @@
       récentes, sourcées avec soin, révisées dans nos ateliers, livrées partout en France.</p>
     <div class="hero-stats">
       <div class="stat"><b>2016</b><span>Année de création</span></div>
-      <div class="stat"><b>4,9<span class="u">/5</span></b><span>214 avis Leboncoin</span></div>
+      <div class="stat"><b>4,9<span class="u">/5</span></b><span>214 avis Google</span></div>
       <div class="stat"><b>12<span class="u">mois</span></b><span>de garantie</span></div>
       <div class="stat"><b>France</b><span>Livraison à domicile</span></div>
     </div>
@@ -101,9 +109,17 @@
   </div>
   <p class="gallery-hint reveal">
     Faites défiler &nbsp;·&nbsp;
-    <a href="https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm" target="_blank" rel="noopener">Tout le stock sur Leboncoin →</a>
+    <a href="https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm" target="_blank" rel="noopener">Voir tout le stock — Leboncoin</a>
+    &nbsp;·&nbsp;
+    <a href="https://pros.lacentrale.fr/C044104/" target="_blank" rel="noopener">La Centrale</a>
   </p>
 </section>
+
+<!-- ===================== ATELIER ===================== -->
+<figure class="plate">
+  <img src="assets/img/insta-1.jpg" alt="L'atelier Édouard Automobiles, logo peint sur le mur" loading="lazy" />
+  <figcaption>L'atelier · Paris 12ᵉ</figcaption>
+</figure>
 
 <!-- ===================== MANIFESTE ===================== -->
 <section class="movement manifesto">
@@ -149,26 +165,28 @@
     <h2>Au-delà de la vente</h2>
   </div>
   <div class="services">
-    <div class="svc reveal"><div class="t">Reprise &amp; estimation</div><div class="g">Votre véhicule repris, estimation sous 24&nbsp;h, déduite du prix d'achat.</div></div>
-    <div class="svc reveal"><div class="t">Livraison à domicile</div><div class="g">Partout en France, camion plateau, remise en main propre.</div></div>
-    <div class="svc reveal"><div class="t">Démarches carte grise</div><div class="g">Immatriculation prise en charge, vous repartez avec le certificat provisoire.</div></div>
-    <div class="svc reveal"><div class="t">Extension de garantie</div><div class="g">Jusqu'à 36&nbsp;mois, panne mécanique et électronique.</div></div>
-    <div class="svc reveal"><div class="t">Financement</div><div class="g">Crédit et LOA via nos partenaires, réponse de principe rapide.</div></div>
+    <div class="svc reveal"><span class="ix" aria-hidden="true">01</span><div class="t">Reprise &amp; estimation</div><div class="g">Votre véhicule repris, estimation sous 24&nbsp;h, déduite du prix d'achat.</div></div>
+    <div class="svc reveal"><span class="ix" aria-hidden="true">02</span><div class="t">Livraison à domicile</div><div class="g">Partout en France, camion plateau, remise en main propre.</div></div>
+    <div class="svc reveal"><span class="ix" aria-hidden="true">03</span><div class="t">Démarches carte grise</div><div class="g">Immatriculation prise en charge, vous repartez avec le certificat provisoire.</div></div>
+    <div class="svc reveal"><span class="ix" aria-hidden="true">04</span><div class="t">Extension de garantie</div><div class="g">Jusqu'à 36&nbsp;mois, panne mécanique et électronique.</div></div>
+    <div class="svc reveal"><span class="ix" aria-hidden="true">05</span><div class="t">Financement</div><div class="g">Crédit et LOA via nos partenaires, réponse de principe rapide.</div></div>
   </div>
 </section>
 
 <!-- ===================== PREUVE ===================== -->
-<section class="movement proof">
+<section class="movement proof" id="avis">
   <div class="score" data-count="4.9" data-decimals="1" aria-hidden="true">4,9</div>
-  <p class="score-cap">4,9 sur 5 &nbsp;·&nbsp; 214 avis clients vérifiés &nbsp;·&nbsp; Leboncoin</p>
+  <p class="score-cap">4,9 sur 5 &nbsp;·&nbsp; 214 avis clients &nbsp;·&nbsp; Google</p>
   <div class="quotes reveal">
     <blockquote>
-      « Emplacement — avis à réimporter depuis la boutique Leboncoin lors de l'intégration. »
-      <footer>Client — Leboncoin</footer>
+      « Un professionnel méticuleux et appliqué. Sincèrement, je recommande d'acheter votre
+      véhicule d'occasion chez Édouard Automobiles. Gérant très professionnel, à l'écoute. »
+      <footer>Avis Google</footer>
     </blockquote>
     <blockquote>
-      « Second emplacement. On affichera 3 à 6 avis récents, avec la date et le modèle acheté. »
-      <footer>Client — Leboncoin</footer>
+      « J'ai acheté une Fiat 500 pour ma fille et je suis vraiment très satisfaite : la confiance,
+      les conseils, le professionnalisme, le sérieux et la sympathie. »
+      <footer>Avis Google</footer>
     </blockquote>
   </div>
 </section>
@@ -185,8 +203,10 @@
       <a href="#methode">La méthode</a>
       <a href="#services">Services</a>
       <a href="contact.html">Prendre rendez-vous</a>
+      <a href="tel:+33750442781">07 50 44 27 81</a>
       <a href="https://www.instagram.com/edouard.automobiles/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm" target="_blank" rel="noopener">Leboncoin</a>
+      <a href="https://pros.lacentrale.fr/C044104/" target="_blank" rel="noopener">La Centrale</a>
     </nav>
   </div>
   <div class="ft-legal">
@@ -197,7 +217,7 @@
   </div>
 </footer>
 
-<script src="assets/stock.js?v=3"></script>
-<script src="assets/main.js?v=3"></script>
+<script src="assets/stock.js?v=6"></script>
+<script src="assets/main.js?v=6"></script>
 </body>
 </html>
