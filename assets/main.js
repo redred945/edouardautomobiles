@@ -1,19 +1,13 @@
 /* =========================================================
-   Édouard Automobiles — comportements front
-   Dégradable : sans JS, le site reste lisible et navigable.
+   Édouard Automobiles — « Galerie cinématique »
+   Mouvement marqué, dégradable, respecte prefers-reduced-motion.
    ========================================================= */
 (function () {
   "use strict";
-  document.documentElement.classList.add("js");
 
+  var root = document.documentElement;
+  root.classList.add("js");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---------- silhouette de secours pour les vignettes sans photo ---------- */
-  var CAR_SVG =
-    '<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<path d="M8,84 L8,72 Q40,69 64,52 Q90,32 146,30 Q192,29 220,50 L272,62 Q288,65 288,80 L288,84 Z" fill="#0d0b08"/>' +
-    '<circle cx="70" cy="86" r="15" fill="#0d0b08"/><circle cx="236" cy="86" r="15" fill="#0d0b08"/>' +
-    "</svg>";
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -21,46 +15,44 @@
     });
   }
 
-  /* ---------- rendu du stock ---------- */
-  function renderStock() {
-    var grid = document.getElementById("stock-grid");
-    if (!grid) return;
-    var list = Array.isArray(window.STOCK) ? window.STOCK : [];
+  /* ---------- séquence d'intro ---------- */
+  function initIntro() {
+    var intro = document.getElementById("intro");
+    var hero = document.getElementById("hero");
+    var seen = false;
+    try { seen = sessionStorage.getItem("ea_seen") === "1"; } catch (e) {}
 
-    if (!list.length) {
-      grid.innerHTML =
-        '<p class="stock-empty">Stock en cours de mise à jour — écrivez-nous pour connaître les véhicules disponibles.</p>';
+    function finish() {
+      if (intro) intro.classList.add("done");
+      if (hero) hero.classList.add("lit");
+      try { sessionStorage.setItem("ea_seen", "1"); } catch (e) {}
+    }
+
+    if (!intro || document.body.classList.contains("no-intro") || reduce || seen) {
+      document.body.classList.add("no-intro");
+      if (hero) hero.classList.add("lit");
       return;
     }
 
-    grid.innerHTML = list
-      .map(function (v) {
-        var specs = (v.specs || []).map(esc).join(" · ");
-        var visual = v.photo
-          ? '<img src="' + esc(v.photo) + '" alt="' + esc(v.titre) + '" loading="lazy" />'
-          : CAR_SVG + '<span class="ind">Visuel indicatif</span>';
-        var stamp = v.vendu ? '<span class="stamp">Vendu</span>' : "";
-        var km = v.km ? '<span class="km">' + esc(v.km) + "</span>" : "<span></span>";
+    var done = false;
+    function go() { if (done) return; done = true; finish(); }
+    setTimeout(go, 1950);
+    ["click", "keydown", "wheel", "touchstart"].forEach(function (ev) {
+      window.addEventListener(ev, go, { once: true, passive: true });
+    });
+  }
 
-        var inner =
-          '<div class="shot">' +
-          '<div class="glow"></div>' +
-          '<span class="marque">' + esc(v.marque) + "</span>" +
-          visual + stamp +
-          "</div>" +
-          '<div class="body">' +
-          '<div class="model">' + esc(v.titre) + "</div>" +
-          '<div class="cspec">' + specs + "</div>" +
-          '<div class="line">' + km + '<span class="price">' + esc(v.prix) + "</span></div>" +
-          "</div>";
-
-        var cls = "card" + (v.vendu ? " sold" : "");
-        if (v.lien && !v.vendu) {
-          return '<a class="' + cls + '" href="' + esc(v.lien) + '" target="_blank" rel="noopener">' + inner + "</a>";
-        }
-        return '<article class="' + cls + '">' + inner + "</article>";
-      })
-      .join("");
+  /* ---------- header ---------- */
+  function initHeader() {
+    var hd = document.getElementById("hd");
+    if (!hd) return;
+    var isContact = /contact\.html/.test(location.pathname);
+    function onScroll() {
+      if (isContact) { hd.classList.add("scrolled"); return; }
+      hd.classList.toggle("scrolled", window.scrollY > 40);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
   }
 
   /* ---------- menu mobile ---------- */
@@ -68,57 +60,118 @@
     var burger = document.getElementById("burger");
     var nav = document.getElementById("nav");
     if (!burger || !nav) return;
-
-    function close() {
-      burger.setAttribute("aria-expanded", "false");
-      nav.classList.remove("open");
-    }
+    function close() { burger.setAttribute("aria-expanded", "false"); nav.classList.remove("open"); }
     burger.addEventListener("click", function () {
       var open = burger.getAttribute("aria-expanded") === "true";
       burger.setAttribute("aria-expanded", String(!open));
       nav.classList.toggle("open", !open);
     });
-    nav.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") close();
-    });
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 820) close();
-    });
+    nav.addEventListener("click", function (e) { if (e.target.tagName === "A") close(); });
+    window.addEventListener("resize", function () { if (window.innerWidth > 820) close(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
   }
 
-  /* ---------- header au scroll ---------- */
-  function initHeader() {
-    var hd = document.getElementById("hd");
-    if (!hd) return;
-    var onScroll = function () {
-      hd.classList.toggle("scrolled", window.scrollY > 8);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+  /* ---------- parallaxe hero ---------- */
+  function initParallax() {
+    var media = document.getElementById("hero-media");
+    var hero = document.getElementById("hero");
+    if (!media || !hero || reduce) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var rect = hero.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      var offset = Math.max(0, -rect.top);
+      media.style.transform = "translate3d(0," + (offset * 0.16).toFixed(1) + "px,0) scale(1.04)";
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
   }
 
-  /* ---------- reveals progressifs ---------- */
+  /* ---------- reveals ---------- */
   function initReveals() {
     var items = [].slice.call(document.querySelectorAll(".reveal"));
     if (reduce || !("IntersectionObserver" in window)) {
       items.forEach(function (el) { el.classList.add("in"); });
       return;
     }
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) {
-            en.target.classList.add("in");
-            io.unobserve(en.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
-    );
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.14 });
     items.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---------- formulaire de contact → mailto ---------- */
+  /* ---------- compteurs ---------- */
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute("data-count"));
+    if (isNaN(target) || el.hasAttribute("data-plain")) return;
+    var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+    if (reduce) { el.textContent = target.toFixed(decimals).replace(".", ","); return; }
+    var start = performance.now();
+    var dur = 1300;
+    function frame(now) {
+      var p = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals).replace(".", ",");
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = target.toFixed(decimals).replace(".", ",");
+    }
+    requestAnimationFrame(frame);
+  }
+  function initCounters() {
+    var els = [].slice.call(document.querySelectorAll("[data-count]"));
+    if (!els.length) return;
+    if (!("IntersectionObserver" in window)) { els.forEach(animateCount); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { animateCount(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.6 });
+    // si l'intro joue, on lance les compteurs quand elle se retire
+    var wait = (reduce || document.body.classList.contains("no-intro")) ? 0 : 2000;
+    setTimeout(function () { els.forEach(function (el) { io.observe(el); }); }, wait);
+  }
+
+  /* ---------- galerie stock ---------- */
+  function renderStock() {
+    var wrap = document.getElementById("stock-gallery");
+    if (!wrap) return;
+    var list = Array.isArray(window.STOCK) ? window.STOCK : [];
+    if (!list.length) {
+      wrap.innerHTML = '<p class="stock-empty">Stock en cours de mise à jour — écrivez-nous pour connaître les véhicules disponibles.</p>';
+      return;
+    }
+    wrap.innerHTML = list.map(function (v) {
+      var specs = (v.specs || []).map(esc).join(" · ");
+      var tag = v.vendu ? "· Vendu ·" : esc(v.marque);
+      var img = v.photo
+        ? '<img src="' + esc(v.photo) + '" alt="' + esc(v.titre) + '" loading="lazy" />'
+        : "";
+      var inner =
+        '<div class="frame">' +
+          '<span class="tag">' + tag + "</span>" + img +
+        "</div>" +
+        '<div class="caption">' +
+          '<div class="name">' + esc(v.titre) + "</div>" +
+          '<div class="cspec">' + specs + "</div>" +
+          '<div class="row">' +
+            '<span class="km">' + (v.km ? esc(v.km) : "") + "</span>" +
+            '<span class="price">' + esc(v.prix) + "</span>" +
+          "</div>" +
+        "</div>";
+      var cls = "piece" + (v.vendu ? " is-sold" : "");
+      if (v.lien && !v.vendu) {
+        return '<a class="' + cls + '" role="listitem" href="' + esc(v.lien) + '" target="_blank" rel="noopener">' + inner + "</a>";
+      }
+      return '<div class="' + cls + '" role="listitem">' + inner + "</div>";
+    }).join("");
+  }
+
+  /* ---------- formulaire ---------- */
   function initForm() {
     var form = document.getElementById("contact-form");
     if (!form) return;
@@ -127,14 +180,8 @@
       var nom = (form.nom.value || "").trim();
       var coord = (form.coord.value || "").trim();
       var msg = (form.message.value || "").trim();
-      if (!nom || !coord || !msg) {
-        form.reportValidity && form.reportValidity();
-        return;
-      }
-      var body =
-        "Nom : " + nom + "\n" +
-        "Téléphone / e-mail : " + coord + "\n\n" +
-        msg + "\n";
+      if (!nom || !coord || !msg) { form.reportValidity && form.reportValidity(); return; }
+      var body = "Nom : " + nom + "\nTéléphone / e-mail : " + coord + "\n\n" + msg + "\n";
       window.location.href =
         "mailto:edouard.automobiles@gmail.com" +
         "?subject=" + encodeURIComponent("Demande de rendez-vous — " + nom) +
@@ -142,16 +189,18 @@
     });
   }
 
-  /* ---------- pied de page ---------- */
   function initYear() {
     var y = document.getElementById("year");
     if (y) y.textContent = new Date().getFullYear();
   }
 
-  renderStock();
-  initNav();
+  initIntro();
   initHeader();
+  initNav();
+  initParallax();
+  renderStock();
   initReveals();
+  initCounters();
   initForm();
   initYear();
 })();

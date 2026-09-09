@@ -1,18 +1,20 @@
 /* =========================================================
    STOCK — saisie manuelle
    ---------------------------------------------------------
-   Ajoutez / modifiez / retirez les objets ci-dessous.
-   Chaque objet = une carte sur l'accueil, dans l'ordre.
+   Un objet = une pièce dans la galerie, dans l'ordre.
 
    Champs :
-     titre   : nom complet du véhicule                (obligatoire)
-     marque  : filigrane affiché en haut de la vignette (obligatoire)
-     specs   : tableau de courtes mentions             (obligatoire)
-     km      : kilométrage, ex. "160 000 km"           (optionnel)
-     prix    : ex. "9 990 €"                           (obligatoire)
-     photo   : "assets/img/mon-fichier.jpg"            (optionnel — sinon vignette graphique)
-     lien    : URL de l'annonce Leboncoin              (optionnel — rend la carte cliquable)
-     vendu   : true pour garder la carte avec le tampon VENDU (optionnel)
+     titre   : nom complet du véhicule                 (obligatoire)
+     marque  : sur-titre court                          (obligatoire)
+     specs   : tableau de courtes mentions              (obligatoire)
+     km      : ex. "160 000 km"                         (optionnel)
+     prix    : ex. "9 990 €"                            (obligatoire)
+     photo   : "assets/img/mon-fichier.webp"            (recommandé — sinon fond neutre)
+     lien    : URL de l'annonce Leboncoin               (optionnel — pièce cliquable)
+     vendu   : true = pièce conservée, marquée « vendu » (optionnel)
+   ---------------------------------------------------------
+   NB : les photos actuelles viennent de Leboncoin (filigrane).
+        Les remplacer par les originaux, mêmes noms de fichiers.
    ========================================================= */
 
 window.STOCK = [
@@ -21,7 +23,8 @@ window.STOCK = [
     marque: "Volkswagen",
     specs: ["310 ch", "2017", "BVM6", "Toit ouvrant", "CarPlay"],
     prix: "23 990 €",
-    lien: "https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm",
+    photo: "assets/img/golf-r-1.webp",
+    lien: "https://www.leboncoin.fr/ad/voitures/3241251512",
     vendu: false
   },
   {
@@ -30,7 +33,8 @@ window.STOCK = [
     specs: ["265 ch", "10/2010", "BVA", "Historique Audi"],
     km: "160 000 km",
     prix: "9 990 €",
-    lien: "https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm",
+    photo: "assets/img/a4-v6-1.webp",
+    lien: "https://www.leboncoin.fr/ad/voitures/3208875700",
     vendu: false
   },
   {
@@ -39,6 +43,7 @@ window.STOCK = [
     specs: ["1999", "1re main FR", "Carnet BMW", "Youngtimer"],
     km: "147 000 km",
     prix: "12 990 €",
+    photo: "assets/img/bmw-e36-1.webp",
     vendu: true
   }
 ];
