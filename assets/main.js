@@ -36,7 +36,7 @@
 
     var done = false;
     function go() { if (done) return; done = true; finish(); }
-    setTimeout(go, 1950);
+    setTimeout(go, 1150);
     ["click", "keydown", "wheel", "touchstart"].forEach(function (ev) {
       window.addEventListener(ev, go, { once: true, passive: true });
     });

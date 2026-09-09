@@ -115,21 +115,20 @@ p { margin: 0; }
   background: var(--noir);
   display: grid;
   place-items: center;
-  transition: opacity .9s var(--ease), visibility .9s;
+  transition: opacity .5s var(--ease), visibility .5s;
 }
 .intro img {
-  width: min(58vw, 320px);
+  width: min(56vw, 300px);
   height: auto;
   opacity: 0;
-  transform: scale(1.08);
-  filter: blur(8px);
-  animation: introLogo 1.7s var(--slow) forwards;
+  transform: scale(1.05);
+  filter: blur(6px);
+  animation: introLogo 1s var(--slow) forwards;
 }
 @keyframes introLogo {
-  0%   { opacity: 0; transform: scale(1.08); filter: blur(8px); }
-  40%  { opacity: 1; filter: blur(0); }
-  80%  { opacity: 1; transform: scale(1); }
-  100% { opacity: 1; transform: scale(.96); }
+  0%   { opacity: 0; transform: scale(1.05); filter: blur(6px); }
+  45%  { opacity: 1; filter: blur(0); transform: scale(1); }
+  100% { opacity: 1; transform: scale(.97); }
 }
 .intro.done { opacity: 0; visibility: hidden; pointer-events: none; }
 .no-intro .intro { display: none; }
@@ -257,10 +256,10 @@ p { margin: 0; }
 .hero h1 { max-width: 17ch; }
 .hero h1 .line { display: block; overflow: hidden; }
 .hero h1 .line > span { display: block; }
-.js .hero h1 .line > span { transform: translateY(110%); transition: transform 1.05s var(--slow); }
+.js .hero h1 .line > span { transform: translateY(110%); transition: transform .7s var(--slow); }
 .js .hero.lit h1 .line > span { transform: none; }
-.js .hero h1 .line:nth-child(2) > span { transition-delay: .1s; }
-.js .hero h1 .line:nth-child(3) > span { transition-delay: .2s; }
+.js .hero h1 .line:nth-child(2) > span { transition-delay: .07s; }
+.js .hero h1 .line:nth-child(3) > span { transition-delay: .14s; }
 
 .hero .lede { margin-top: 22px; max-width: 42ch; }
 
@@ -277,6 +276,12 @@ p { margin: 0; }
   color: var(--craie);
   line-height: 1;
   font-variant-numeric: tabular-nums;
+}
+.hero-stats .stat b .u {
+  font-size: .62em;
+  color: var(--craie-dim);
+  vertical-align: baseline;
+  margin-left: .04em;
 }
 .hero-stats .stat span {
   display: block;
