@@ -19,17 +19,31 @@ des filets 1px, de grandes images. Références Kidston / Zagato / Classic Drive
 
 ## Stack
 
-- `index.html` — accueil : Hero / Bandeau confiance / Le stock (slider) / Patchwork atelier + Manifeste / La méthode / Services / Preuve
+- `index.html` — accueil : Hero / Bandeau confiance / Le stock (slider) / Patchwork atelier + Manifeste / La méthode / Services / Preuve / Appel final
 - `contact.html` — page dédiée « Prendre rendez-vous » (infos, formulaire `mailto`, plan OpenStreetMap)
+- `mentions-legales.html` — obligation légale ; **contient des champs `[à compléter]`** à renseigner avant diffusion
+- `robots.txt` / `sitemap.xml`
 - `assets/styles.css` — thème complet, univers unique assumé (pas de mode clair)
 - `assets/stock.js` — **le stock, en saisie manuelle** : un tableau `window.STOCK`
-- `assets/main.js` — intro, parallaxe, reveals, compteurs, rendu du stock, slider (flèches + progression), menu mobile, formulaire, année
-- `assets/img/logo-edouard.png` — logo détouré (fond transparent), généré depuis le JPG fourni
-- `assets/img/youngtimerporsche.jpg` — fond de hero (fournie, droits OK)
-- `assets/img/atmo-1…8.jpg` — patchwork atelier (visuels repris d'Instagram : atelier, détails phares/sigles) ; `atmo-7.jpg` sert aussi de photo pour la Mini
+- `assets/main.js` — intro, parallaxe, reveals, compteurs, rendu du stock, flèches du slider, menu mobile (fond + piège de focus), section active dans la nav, formulaire, année
+- `assets/fonts/` — **polices auto-hébergées** (Fraunces, Archivo, Spline Sans Mono, sous-ensembles latins) : aucune requête vers Google, pas de sujet RGPD
+- `assets/img/hero-atelier-1600.webp` + `-900.webp` — fond de hero en deux tailles (`srcset`)
+- `assets/img/og-image.jpg` — image de partage social 1200×630
+- `assets/img/logo-edouard.png` — logo détouré (fond transparent), 420 px
+- `assets/img/atmo-1…8.webp` — patchwork atelier (visuels Instagram)
 - `assets/img/*.webp` — photos véhicules **reprises de Leboncoin (filigrane)** — à remplacer par les originaux
 - `assets/favicon.svg` — monogramme É salmon
-- Polices via Google Fonts (CDN). Aucune autre dépendance, pas de framework.
+- Aucune dépendance externe, pas de framework, pas de build.
+
+### Poids
+
+Site complet **1,35 Mo** ; chemin critique mobile **~178 Ko** (hero 900 px + logo + CSS + JS + 2 polices + HTML).
+
+### URL de production
+
+Les balises `canonical`, `og:*` et le `sitemap.xml` pointent vers
+`https://edouard-automobiles.vercel.app`. **À mettre à jour** le jour où un nom de
+domaine propre est branché (chercher/remplacer dans les 3 pages HTML + `sitemap.xml` + `robots.txt`).
 
 ## Gérer le stock
 
@@ -59,7 +73,8 @@ devient une pièce dans la galerie de l'accueil, dans l'ordre.
 |---|---|---|
 | Logo | `logo-edouard.png` détouré depuis le JPG fourni | Fournir le **vectoriel officiel** (SVG) pour une netteté parfaite en grand |
 | Photos véhicules | `*.webp` repris de Leboncoin, **filigrane visible** | Remplacer par les originaux, **mêmes noms de fichiers** |
-| Photo hero | `youngtimerporsche.jpg` (droits OK, confirmé) | Rien — ou une photo maison de l'atelier au même cadrage large |
+| Photo hero | `hero-atelier-1600/900.webp` (droits OK, confirmé) | Rien — ou une photo maison de l'atelier au même cadrage large |
+| **Mentions légales** | `mentions-legales.html`, **7 champs `[à compléter]`** | Renseigner capital, RCS, TVA, directeur de publication, médiateur de la consommation, adresse de l'hébergeur |
 | Avis clients | 2 extraits **réels repris de Google** dans `#avis` | Compléter avec 3 à 6 avis récents (nom, date, modèle) ; brancher un widget Google si voulu |
 | Plan (contact) | iframe OpenStreetMap, marqueur approché sur l'avenue | Affiner `bbox` / `marker`, ou passer à un plan Google si besoin |
 | Téléphone | `07 50 44 27 81` (repris d'Instagram / Google) | Confirmer le numéro |

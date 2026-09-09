@@ -7,24 +7,37 @@
 <meta name="description" content="Négociant indépendant depuis 2016. Youngtimers et occasions récentes sourcées avec soin, révisées en atelier, garanties 12 mois. Livraison partout en France. Visite sur rendez-vous, Paris 12ᵉ." />
 <meta name="theme-color" content="#0a0a0b" />
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-<meta property="og:title" content="Édouard Automobiles" />
-<meta property="og:description" content="Négociant en véhicules d'intérêt à Paris 12ᵉ depuis 2016. Sélection, atelier, garantie 12 mois, livraison France entière." />
-<meta property="og:image" content="assets/img/youngtimerporsche.jpg" />
+<link rel="canonical" href="https://edouard-automobiles.vercel.app/" />
+<meta property="og:site_name" content="Édouard Automobiles" />
+<meta property="og:title" content="Édouard Automobiles — Négociant en véhicules d'intérêt" />
+<meta property="og:description" content="Youngtimers et occasions récentes, sourcées avec soin, révisées en atelier, garanties 12 mois. Paris 12ᵉ, sur rendez-vous." />
+<meta property="og:image" content="https://edouard-automobiles.vercel.app/assets/img/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://edouard-automobiles.vercel.app/" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="fr_FR" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=22" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Édouard Automobiles — Négociant en véhicules d'intérêt" />
+<meta name="twitter:description" content="Youngtimers et occasions récentes, révisées en atelier, garanties 12 mois. Paris 12ᵉ." />
+<meta name="twitter:image" content="https://edouard-automobiles.vercel.app/assets/img/og-image.jpg" />
+<link rel="preload" href="assets/fonts/fraunces-normal-400500-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/archivo-normal-400600-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=23" />
+<link rel="stylesheet" href="assets/styles.css?v=23" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "AutoDealer",
+  "@id": "https://edouard-automobiles.vercel.app/#dealer",
   "name": "Édouard Automobiles",
+  "url": "https://edouard-automobiles.vercel.app/",
+  "image": "https://edouard-automobiles.vercel.app/assets/img/og-image.jpg",
   "description": "Négociant indépendant en véhicules d'intérêt : youngtimers et occasions récentes, sourcées, révisées en atelier et garanties 12 mois.",
   "email": "edouard.automobiles@gmail.com",
   "telephone": "+33750442781",
   "priceRange": "€€",
+  "currenciesAccepted": "EUR",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "28 avenue de Saint-Mandé",
@@ -53,24 +66,38 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Aller au contenu</a>
+
 <div class="intro" id="intro" aria-hidden="true">
-  <img src="assets/img/logo-edouard.png" alt="" />
+  <img src="assets/img/logo-edouard.png" alt="" width="420" height="205" />
 </div>
 
 <header class="hd" id="hd">
   <a href="#top" class="hd-logo" aria-label="Édouard Automobiles — accueil">
-    <img src="assets/img/logo-edouard.png" alt="Édouard Automobiles" />
+    <img src="assets/img/logo-edouard.png" alt="Édouard Automobiles" width="420" height="205" />
   </a>
+
   <nav class="nav" id="nav" aria-label="Navigation principale">
-    <a href="#stock">Le stock</a>
-    <a href="#methode">La méthode</a>
-    <a href="#services">Services</a>
+    <a href="#stock" data-spy="stock">Le stock</a>
+    <a href="#methode" data-spy="methode">La méthode</a>
+    <a href="#services" data-spy="services">Services</a>
     <a href="contact.html" class="n-cta">Prendre rendez-vous</a>
   </nav>
-  <button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">
-    <span></span><span></span><span></span>
-  </button>
+
+  <div class="hd-right">
+    <a class="hd-tel" href="tel:+33750442781" aria-label="Appeler Édouard Automobiles au 07 50 44 27 81">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.58 3.6a1 1 0 0 1-.25 1z" />
+      </svg>
+      <span class="hd-tel-num">07 50 44 27 81</span>
+    </a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
+
+<div class="nav-backdrop" id="nav-backdrop" hidden></div>
 
 <main id="main">
 <span id="top"></span>
@@ -78,7 +105,10 @@
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="hero">
   <div class="hero-media" id="hero-media">
-    <img src="assets/img/youngtimerporsche.jpg" alt="Trois youngtimers dans l'atelier au petit matin" fetchpriority="high" />
+    <img src="assets/img/hero-atelier-1600.webp"
+         srcset="assets/img/hero-atelier-900.webp 900w, assets/img/hero-atelier-1600.webp 1600w"
+         sizes="100vw" width="1600" height="738" fetchpriority="high" decoding="async"
+         alt="Trois Porsche 911 youngtimers alignées dans l'atelier, au contre-jour" />
   </div>
   <div class="hero-in">
     <h1>
@@ -97,12 +127,12 @@
 </section>
 
 <!-- ===================== BANDEAU CONFIANCE ===================== -->
-<div class="trust" role="list" aria-label="Nos garanties">
-  <ul>
-    <li role="listitem">Historique constructeur</li>
-    <li role="listitem">Révision en atelier</li>
-    <li role="listitem">Garantie 12 mois</li>
-    <li role="listitem">Carte grise incluse</li>
+<div class="trust">
+  <ul aria-label="Ce qui est compris">
+    <li>Historique constructeur</li>
+    <li>Révision en atelier</li>
+    <li>Garantie 12 mois</li>
+    <li>Carte grise incluse</li>
   </ul>
 </div>
 
@@ -113,15 +143,18 @@
     <h2>Actuellement à l'atelier</h2>
   </div>
   <div class="slider" id="slider">
-    <button type="button" class="s-arrow s-prev" id="s-prev" aria-label="Véhicules précédents">&larr;</button>
-    <div class="gallery" id="stock-gallery" role="list" aria-label="Véhicules en stock">
+    <button type="button" class="s-arrow s-prev" id="s-prev" aria-label="Véhicules précédents">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" /></svg>
+    </button>
+    <div class="gallery" id="stock-gallery" aria-label="Véhicules en stock">
       <!-- injecté depuis assets/stock.js -->
     </div>
-    <button type="button" class="s-arrow s-next" id="s-next" aria-label="Véhicules suivants">&rarr;</button>
+    <button type="button" class="s-arrow s-next" id="s-next" aria-label="Véhicules suivants">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" /></svg>
+    </button>
   </div>
   <p class="gallery-hint reveal">
     <a href="https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm" target="_blank" rel="noopener">Voir tout le stock — Leboncoin</a>
-    &nbsp;·&nbsp;
     <a href="https://pros.lacentrale.fr/C044104/" target="_blank" rel="noopener">La Centrale</a>
   </p>
 </section>
@@ -129,14 +162,14 @@
 <!-- ===================== ATELIER — PATCHWORK ===================== -->
 <section class="movement manifesto patchwork" aria-label="L'atelier Édouard Automobiles">
   <div class="pw-grid" aria-hidden="true">
-    <img src="assets/img/atmo-1.jpg" alt="" loading="lazy" />
-    <img src="assets/img/atmo-2.jpg" alt="" loading="lazy" />
-    <img src="assets/img/atmo-3.jpg" alt="" loading="lazy" />
-    <img src="assets/img/atmo-4.jpg" alt="" loading="lazy" />
-    <img src="assets/img/atmo-5.jpg" alt="" loading="lazy" />
-    <img src="assets/img/atmo-6.jpg" alt="" loading="lazy" />
-    <img src="assets/img/atmo-7.jpg" alt="" loading="lazy" />
-    <img src="assets/img/atmo-8.jpg" alt="" loading="lazy" />
+    <img src="assets/img/atmo-1.webp" alt="" loading="lazy" decoding="async" width="480" height="640" />
+    <img src="assets/img/atmo-2.webp" alt="" loading="lazy" decoding="async" width="361" height="640" />
+    <img src="assets/img/atmo-3.webp" alt="" loading="lazy" decoding="async" width="360" height="640" />
+    <img src="assets/img/atmo-4.webp" alt="" loading="lazy" decoding="async" width="361" height="640" />
+    <img src="assets/img/atmo-5.webp" alt="" loading="lazy" decoding="async" width="361" height="640" />
+    <img src="assets/img/atmo-6.webp" alt="" loading="lazy" decoding="async" width="360" height="640" />
+    <img src="assets/img/atmo-7.webp" alt="" loading="lazy" decoding="async" width="520" height="390" />
+    <img src="assets/img/atmo-8.webp" alt="" loading="lazy" decoding="async" width="520" height="390" />
   </div>
   <div class="pw-text">
     <p class="kicker reveal">Négociant en véhicules d'intérêt</p>
@@ -151,28 +184,28 @@
     <p class="kicker">La méthode</p>
     <h2>Ce qu'un véhicule traverse avant d'être proposé</h2>
   </div>
-  <div class="steps">
-    <div class="step reveal">
-      <div class="num">01</div>
+  <ol class="steps">
+    <li class="step reveal">
+      <span class="num">01</span>
       <h3>Sourcing</h3>
       <p>Achat sélectif. Première main et historique constructeur vérifiés avant tout.</p>
-    </div>
-    <div class="step reveal">
-      <div class="num">02</div>
+    </li>
+    <li class="step reveal">
+      <span class="num">02</span>
       <h3>Inspection</h3>
       <p>Contrôle mécanique et esthétique, point par point, dans nos ateliers.</p>
-    </div>
-    <div class="step reveal">
-      <div class="num">03</div>
+    </li>
+    <li class="step reveal">
+      <span class="num">03</span>
       <h3>Révision</h3>
       <p>Entretien remis à jour, pièces d'usure et distribution remplacées si besoin.</p>
-    </div>
-    <div class="step reveal">
-      <div class="num">04</div>
+    </li>
+    <li class="step reveal">
+      <span class="num">04</span>
       <h3>Garantie</h3>
       <p>12 mois. Carte grise gérée, livraison partout en France.</p>
-    </div>
-  </div>
+    </li>
+  </ol>
 </section>
 
 <!-- ===================== SERVICES ===================== -->
@@ -181,17 +214,17 @@
     <p class="kicker">Services</p>
     <h2>Au-delà de la vente</h2>
   </div>
-  <div class="services">
-    <div class="svc reveal"><span class="ix" aria-hidden="true">01</span><div class="t">Reprise &amp; estimation</div><div class="g">Votre véhicule repris, estimation sous 24&nbsp;h, déduite du prix d'achat.</div></div>
-    <div class="svc reveal"><span class="ix" aria-hidden="true">02</span><div class="t">Livraison à domicile</div><div class="g">Partout en France, camion plateau, remise en main propre.</div></div>
-    <div class="svc reveal"><span class="ix" aria-hidden="true">03</span><div class="t">Démarches carte grise</div><div class="g">Immatriculation prise en charge, vous repartez avec le certificat provisoire.</div></div>
-    <div class="svc reveal"><span class="ix" aria-hidden="true">04</span><div class="t">Extension de garantie</div><div class="g">Jusqu'à 36&nbsp;mois, panne mécanique et électronique.</div></div>
-  </div>
+  <ul class="services">
+    <li class="svc reveal"><span class="ix" aria-hidden="true">01</span><h3 class="t">Reprise &amp; estimation</h3><p class="g">Votre véhicule repris, estimation sous 24&nbsp;h, déduite du prix d'achat.</p></li>
+    <li class="svc reveal"><span class="ix" aria-hidden="true">02</span><h3 class="t">Livraison à domicile</h3><p class="g">Partout en France, camion plateau, remise en main propre.</p></li>
+    <li class="svc reveal"><span class="ix" aria-hidden="true">03</span><h3 class="t">Démarches carte grise</h3><p class="g">Immatriculation prise en charge, vous repartez avec le certificat provisoire.</p></li>
+    <li class="svc reveal"><span class="ix" aria-hidden="true">04</span><h3 class="t">Extension de garantie</h3><p class="g">Jusqu'à 36&nbsp;mois, panne mécanique et électronique.</p></li>
+  </ul>
 </section>
 
 <!-- ===================== PREUVE ===================== -->
 <section class="movement proof" id="avis">
-  <div class="score" data-count="4.9" data-decimals="1" aria-hidden="true">4,9</div>
+  <p class="score" data-count="4.9" data-decimals="1" aria-hidden="true">4,9</p>
   <p class="score-cap">4,9 sur 5 &nbsp;·&nbsp; 214 avis clients &nbsp;·&nbsp; Google</p>
   <div class="quotes reveal">
     <blockquote>
@@ -207,12 +240,24 @@
   </div>
 </section>
 
+<!-- ===================== APPEL FINAL ===================== -->
+<section class="movement closing">
+  <p class="kicker reveal">Sur rendez-vous</p>
+  <h2 class="reveal">Une voiture vous intéresse&nbsp;?</h2>
+  <p class="lede measure reveal d1">On reçoit à l'atelier, dans le 12ᵉ, sur créneau réservé.
+    Un appel suffit pour caler une visite ou faire estimer une reprise.</p>
+  <p class="closing-actions reveal d2">
+    <a class="btn-solid" href="tel:+33750442781">07 50 44 27 81</a>
+    <a class="btn-ghost" href="contact.html">Écrire un message</a>
+  </p>
+</section>
+
 </main>
 
 <footer class="ft">
   <div class="ft-top">
     <a href="#top" class="ft-logo" aria-label="Édouard Automobiles">
-      <img src="assets/img/logo-edouard.png" alt="Édouard Automobiles" />
+      <img src="assets/img/logo-edouard.png" alt="Édouard Automobiles" width="420" height="205" loading="lazy" />
     </a>
     <nav class="ft-nav" aria-label="Pied de page">
       <a href="#stock">Le stock</a>
@@ -223,6 +268,7 @@
       <a href="https://www.instagram.com/edouard.automobiles/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.leboncoin.fr/boutique/53427/edouard_automobiles.htm" target="_blank" rel="noopener">Leboncoin</a>
       <a href="https://pros.lacentrale.fr/C044104/" target="_blank" rel="noopener">La Centrale</a>
+      <a href="mentions-legales.html">Mentions légales</a>
     </nav>
   </div>
   <div class="ft-legal">
@@ -233,7 +279,7 @@
   </div>
 </footer>
 
-<script src="assets/stock.js?v=22"></script>
-<script src="assets/main.js?v=22"></script>
+<script src="assets/stock.js?v=23"></script>
+<script src="assets/main.js?v=23"></script>
 </body>
 </html>

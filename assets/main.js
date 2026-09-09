@@ -8,6 +8,8 @@
   var root = document.documentElement;
   root.classList.add("js");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var TEL = "07 50 44 27 81";
+  var MAIL = "edouard.automobiles@gmail.com";
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -46,11 +48,10 @@
   function initHeader() {
     var hd = document.getElementById("hd");
     if (!hd) return;
-    var isContact = /contact\.html/.test(location.pathname);
-    function onScroll() {
-      if (isContact) { hd.classList.add("scrolled"); return; }
-      hd.classList.toggle("scrolled", window.scrollY > 40);
-    }
+    // les pages intérieures gardent un header opaque : on se fie à un attribut,
+    // pas au nom de fichier (Vercel sert des URL sans « .html »)
+    if (document.body.hasAttribute("data-static-header")) { hd.classList.add("scrolled"); return; }
+    function onScroll() { hd.classList.toggle("scrolled", window.scrollY > 40); }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
@@ -59,16 +60,50 @@
   function initNav() {
     var burger = document.getElementById("burger");
     var nav = document.getElementById("nav");
+    var backdrop = document.getElementById("nav-backdrop");
     if (!burger || !nav) return;
-    function close() { burger.setAttribute("aria-expanded", "false"); nav.classList.remove("open"); }
-    burger.addEventListener("click", function () {
-      var open = burger.getAttribute("aria-expanded") === "true";
-      burger.setAttribute("aria-expanded", String(!open));
-      nav.classList.toggle("open", !open);
+    var lastFocus = null;
+
+    function isOpen() { return burger.getAttribute("aria-expanded") === "true"; }
+
+    function open() {
+      burger.setAttribute("aria-expanded", "true");
+      burger.setAttribute("aria-label", "Fermer le menu");
+      nav.classList.add("open");
+      document.body.classList.add("nav-open");
+      if (backdrop) { backdrop.hidden = false; requestAnimationFrame(function () { backdrop.classList.add("show"); }); }
+      lastFocus = document.activeElement;
+      var first = nav.querySelector("a");
+      if (first) first.focus();
+    }
+
+    function close(refocus) {
+      burger.setAttribute("aria-expanded", "false");
+      burger.setAttribute("aria-label", "Ouvrir le menu");
+      nav.classList.remove("open");
+      document.body.classList.remove("nav-open");
+      if (backdrop) {
+        backdrop.classList.remove("show");
+        setTimeout(function () { if (!isOpen()) backdrop.hidden = true; }, 350);
+      }
+      if (refocus && lastFocus) { try { lastFocus.focus(); } catch (e) {} }
+    }
+
+    burger.addEventListener("click", function () { isOpen() ? close(true) : open(); });
+    if (backdrop) backdrop.addEventListener("click", function () { close(true); });
+    nav.addEventListener("click", function (e) { if (e.target.tagName === "A") close(false); });
+    window.addEventListener("resize", function () { if (window.innerWidth > 820 && isOpen()) close(false); });
+
+    document.addEventListener("keydown", function (e) {
+      if (!isOpen()) return;
+      if (e.key === "Escape") { close(true); return; }
+      if (e.key !== "Tab") return;
+      // on garde le focus dans le panneau tant qu'il est ouvert
+      var items = [].slice.call(nav.querySelectorAll("a")).concat([burger]);
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
-    nav.addEventListener("click", function (e) { if (e.target.tagName === "A") close(); });
-    window.addEventListener("resize", function () { if (window.innerWidth > 820) close(); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
   }
 
   /* ---------- parallaxe hero ---------- */
@@ -83,7 +118,6 @@
       var rect = hero.getBoundingClientRect();
       if (rect.bottom < 0 || rect.top > window.innerHeight) return;
       var offset = Math.max(0, -rect.top);
-      // l'image déborde de 20 % en bas : on translate au plus ~12 % de la hauteur
       var shift = Math.min(offset * 0.12, hero.offsetHeight * 0.12);
       img.style.transform = "translate3d(0,-" + shift.toFixed(1) + "px,0)";
     }
@@ -96,22 +130,41 @@
   /* ---------- reveals ---------- */
   function initReveals() {
     var items = [].slice.call(document.querySelectorAll(".reveal"));
-    if (reduce || !("IntersectionObserver" in window)) {
-      items.forEach(function (el) { el.classList.add("in"); });
-      return;
-    }
+    function showAll() { items.forEach(function (el) { el.classList.add("in"); }); }
+    if (reduce || !("IntersectionObserver" in window)) { showAll(); return; }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
       });
     }, { rootMargin: "0px 0px -10% 0px", threshold: 0.14 });
     items.forEach(function (el) { io.observe(el); });
+    // filet de sécurité : rien ne doit rester invisible si l'observer ne se déclenche pas
+    setTimeout(showAll, 4000);
+  }
+
+  /* ---------- nav : section active ---------- */
+  function initSpy() {
+    var links = [].slice.call(document.querySelectorAll(".nav a[data-spy]"));
+    if (!links.length || !("IntersectionObserver" in window)) return;
+    var map = {};
+    links.forEach(function (a) {
+      var sec = document.getElementById(a.getAttribute("data-spy"));
+      if (sec) map[a.getAttribute("data-spy")] = { link: a, sec: sec };
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var id = en.target.id;
+        if (!map[id]) return;
+        map[id].link.classList.toggle("is-active", en.isIntersecting);
+      });
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    Object.keys(map).forEach(function (k) { io.observe(map[k].sec); });
   }
 
   /* ---------- compteurs ---------- */
   function animateCount(el) {
     var target = parseFloat(el.getAttribute("data-count"));
-    if (isNaN(target) || el.hasAttribute("data-plain")) return;
+    if (isNaN(target)) return;
     var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
     if (reduce) { el.textContent = target.toFixed(decimals).replace(".", ","); return; }
     var start = performance.now();
@@ -134,9 +187,7 @@
         if (en.isIntersecting) { animateCount(en.target); io.unobserve(en.target); }
       });
     }, { threshold: 0.6 });
-    // si l'intro joue, on lance les compteurs quand elle se retire
-    var wait = (reduce || document.body.classList.contains("no-intro")) ? 0 : 2000;
-    setTimeout(function () { els.forEach(function (el) { io.observe(el); }); }, wait);
+    els.forEach(function (el) { io.observe(el); });
   }
 
   /* ---------- galerie stock ---------- */
@@ -145,32 +196,33 @@
     if (!wrap) return;
     var list = Array.isArray(window.STOCK) ? window.STOCK : [];
     if (!list.length) {
-      wrap.innerHTML = '<p class="stock-empty">Stock en cours de mise à jour — écrivez-nous pour connaître les véhicules disponibles.</p>';
+      wrap.innerHTML = '<p class="stock-empty">Stock en cours de mise à jour — appelez-nous au ' + TEL + ' pour connaître les véhicules disponibles.</p>';
       return;
     }
     wrap.innerHTML = list.map(function (v) {
       var specs = (v.specs || []).map(esc).join(" · ");
       var tag = v.vendu ? "· Vendu ·" : esc(v.marque);
+      var alt = v.vendu ? esc(v.titre) + " — vendue" : esc(v.titre);
       var img = v.photo
-        ? '<img src="' + esc(v.photo) + '" alt="' + esc(v.titre) + '" loading="lazy" />'
+        ? '<img src="' + esc(v.photo) + '" alt="' + alt + '" loading="lazy" decoding="async" />'
         : "";
       var inner =
         '<div class="frame">' +
           '<span class="tag">' + tag + "</span>" + img +
         "</div>" +
         '<div class="caption">' +
-          '<div class="name">' + esc(v.titre) + "</div>" +
-          '<div class="cspec">' + specs + "</div>" +
-          '<div class="row">' +
-            '<span class="km">' + (v.km ? esc(v.km) : "") + "</span>" +
+          '<h3 class="name">' + esc(v.titre) + "</h3>" +
+          '<p class="cspec">' + specs + "</p>" +
+          '<p class="row">' +
+            (v.km ? '<span class="km">' + esc(v.km) + "</span>" : "") +
             '<span class="price">' + esc(v.prix) + "</span>" +
-          "</div>" +
+          "</p>" +
         "</div>";
       var cls = "piece" + (v.vendu ? " is-sold" : "");
       if (v.lien && !v.vendu) {
-        return '<a class="' + cls + '" role="listitem" href="' + esc(v.lien) + '" target="_blank" rel="noopener">' + inner + "</a>";
+        return '<a class="' + cls + '" href="' + esc(v.lien) + '" target="_blank" rel="noopener">' + inner + "</a>";
       }
-      return '<div class="' + cls + '" role="listitem">' + inner + "</div>";
+      return '<article class="' + cls + '">' + inner + "</article>";
     }).join("");
   }
 
@@ -214,17 +266,28 @@
   function initForm() {
     var form = document.getElementById("contact-form");
     if (!form) return;
+    var status = document.getElementById("cform-status");
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var nom = (form.nom.value || "").trim();
       var coord = (form.coord.value || "").trim();
       var msg = (form.message.value || "").trim();
-      if (!nom || !coord || !msg) { form.reportValidity && form.reportValidity(); return; }
+      if (!nom || !coord || !msg) { if (form.reportValidity) form.reportValidity(); return; }
+
       var body = "Nom : " + nom + "\nTéléphone / e-mail : " + coord + "\n\n" + msg + "\n";
-      window.location.href =
-        "mailto:edouard.automobiles@gmail.com" +
+      var href = "mailto:" + MAIL +
         "?subject=" + encodeURIComponent("Demande de rendez-vous — " + nom) +
         "&body=" + encodeURIComponent(body);
+
+      if (status) {
+        status.hidden = false;
+        status.innerHTML =
+          "Votre messagerie va s'ouvrir avec le message pré-rempli — il reste à l'envoyer.<br />" +
+          "Si rien ne se passe, écrivez à <a href=\"mailto:" + MAIL + "\">" + MAIL + "</a> " +
+          "ou appelez le <a href=\"tel:+33750442781\">" + TEL + "</a>.";
+      }
+      window.location.href = href;
     });
   }
 
@@ -233,14 +296,9 @@
     if (y) y.textContent = new Date().getFullYear();
   }
 
-  initIntro();
-  initHeader();
-  initNav();
-  initParallax();
-  renderStock();
-  initSlider();
-  initReveals();
-  initCounters();
-  initForm();
-  initYear();
+  /* ---------- démarrage : une panne n'en entraîne pas d'autres ---------- */
+  [initIntro, initHeader, initNav, initParallax, renderStock, initSlider,
+   initReveals, initSpy, initCounters, initForm, initYear].forEach(function (fn) {
+    try { fn(); } catch (err) { if (window.console) console.error("[EA]", fn.name, err); }
+  });
 })();
