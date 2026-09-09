@@ -19,15 +19,15 @@ des filets 1px, de grandes images. Références Kidston / Zagato / Classic Drive
 
 ## Stack
 
-- `index.html` — accueil : Hero / Le stock (galerie qui défile) / Manifeste / La méthode / Services / Preuve
+- `index.html` — accueil : Hero / Bandeau confiance / Le stock (slider) / Patchwork atelier + Manifeste / La méthode / Services / Preuve
 - `contact.html` — page dédiée « Prendre rendez-vous » (infos, formulaire `mailto`, plan OpenStreetMap)
 - `assets/styles.css` — thème complet, univers unique assumé (pas de mode clair)
 - `assets/stock.js` — **le stock, en saisie manuelle** : un tableau `window.STOCK`
-- `assets/main.js` — intro, parallaxe, reveals, compteurs, rendu du stock, menu mobile, formulaire, année
+- `assets/main.js` — intro, parallaxe, reveals, compteurs, rendu du stock, slider (flèches + progression), menu mobile, formulaire, année
 - `assets/img/logo-edouard.png` — logo détouré (fond transparent), généré depuis le JPG fourni
 - `assets/img/youngtimerporsche.jpg` — fond de hero (fournie, droits OK)
-- `assets/img/insta-1.jpg` — plaque atelier plein cadre (mur + logo, repris d'Instagram)
-- `assets/img/*.webp` — photos véhicules **reprises de Leboncoin (filigrane)** ; `insta-2.jpg` = Mini, repris d'Instagram — à remplacer par les originaux
+- `assets/img/atmo-1…8.jpg` — patchwork atelier (visuels repris d'Instagram : atelier, détails phares/sigles) ; `atmo-7.jpg` sert aussi de photo pour la Mini
+- `assets/img/*.webp` — photos véhicules **reprises de Leboncoin (filigrane)** — à remplacer par les originaux
 - `assets/favicon.svg` — monogramme É salmon
 - Polices via Google Fonts (CDN). Aucune autre dépendance, pas de framework.
 

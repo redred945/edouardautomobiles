@@ -320,7 +320,32 @@ p { margin: 0; }
    Mouvements (sections)
    ========================================================= */
 .movement { padding: clamp(60px, 9vh, 116px) var(--gutter); position: relative; }
-.hero + .movement { padding-top: clamp(44px, 6vh, 76px); }
+.hero + .movement, .trust + .movement { padding-top: clamp(44px, 6vh, 76px); }
+
+/* ---------- bandeau confiance (sous le hero) ---------- */
+.trust {
+  background: var(--noir-2);
+  border-top: 1px solid var(--voile);
+  border-bottom: 1px solid var(--voile);
+  padding: 15px var(--gutter);
+}
+.trust ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 8px 0;
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  color: var(--craie-dim);
+}
+.trust li { display: flex; align-items: center; }
+.trust li::after {
+  content: "\2022";
+  color: var(--salmon);
+  margin: 0 clamp(14px, 3vw, 34px);
+}
+.trust li:last-child::after { content: none; }
 .mv-head { margin-bottom: clamp(30px, 5vh, 60px); }
 .mv-head h2 { margin-top: 6px; max-width: 22ch; }
 
