@@ -16,7 +16,7 @@ HTML / CSS / JS statiques, **aucune étape de build**, servi tel quel par Vercel
 - `assets/main.js` — rendu du stock, menu mobile, header au scroll, reveals dégradables,
   formulaire de contact (ouvre la messagerie en `mailto`), année du pied de page.
 - `assets/favicon.svg` — monogramme É cuivre sur médaillon encre.
-- `assets/img/` — vide au départ ; y déposer les photos véhicules / atelier.
+- `assets/img/` — photos véhicules / atelier. Contient `youngtimerporsche.jpg` (fond de hero, image de référence).
 - Polices via Google Fonts (CDN). Aucune autre dépendance externe, pas de framework.
 
 ## Gérer le stock
@@ -50,7 +50,7 @@ Les 3 véhicules présents sont des exemples repris de la boutique Leboncoin (à
 |---|---|---|
 | Logo | Wordmark en texte (Archivo) dans le header | Fournir le logo vectoriel officiel (médaillon EDOUARD cuivre) → l'intégrer en `assets/logo-edouard.svg` |
 | Photos véhicules | Aucune — vignettes graphiques | Déposer les photos dans `assets/img/`, renseigner `photo:` dans `stock.js` |
-| Photos atelier / hero | Fond dégradé + silhouette SVG | Ajouter une vraie photo d'atelier sombre en fond de hero si souhaité |
+| Photo hero | `assets/img/youngtimerporsche.jpg` (image de référence fournie) | **Confirmer les droits d'usage** ou remplacer par une photo maison de l'atelier, même cadrage large |
 | Avis clients | 2 emplacements placeholder | Recopier 3 à 6 avis récents de la boutique Leboncoin (nom, date, modèle) dans la section `#avis` |
 | Carte contact | Bloc graphique stylisé (pas de vraie carte) | Brancher une iframe OpenStreetMap / Google Maps centrée sur le 28 av. de Saint-Mandé |
 | Téléphone | Non affiché (non communiqué) | Ajouter dans la `<dl>` de `#contact` + lien `tel:` si le client veut le publier |
