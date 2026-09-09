@@ -295,16 +295,18 @@ p { margin: 0; }
   color: var(--craie-dim);
 }
 
-/* ---------- hero : texte en haut sur mobile (pas de vide au-dessus) ---------- */
+/* ---------- hero mobile : titre en haut, chiffres calés en bas ---------- */
 @media (max-width: 620px) {
-  .hero { min-height: 82svh; align-items: flex-start; }
+  .hero { min-height: 82svh; align-items: stretch; }
   .hero-in {
-    padding-top: 96px;      /* juste sous le header, le texte remonte */
+    display: flex;
+    flex-direction: column;
+    padding-top: 96px;      /* titre juste sous le header */
     padding-bottom: 40px;
   }
   .hero h1 { max-width: 100%; font-size: clamp(2rem, 8.5vw, 2.6rem); }
   .hero .lede { margin-top: 18px; max-width: 100%; font-size: .96rem; line-height: 1.48; }
-  .hero-stats { margin-top: 28px; gap: 18px 36px; }
+  .hero-stats { margin-top: auto; gap: 18px 36px; }  /* poussés en bas du hero */
 }
 
 .scroll-cue {
